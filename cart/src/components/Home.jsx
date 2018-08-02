@@ -44,7 +44,6 @@ class home extends React.Component {
 
 
   nextPath(path) {
-    console.log("name:"+this.props.name);
     this.props.buttonClicked();
     this.props.history.push(path);
   }

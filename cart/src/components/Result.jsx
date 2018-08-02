@@ -14,7 +14,6 @@ class Result extends React.Component {
     super(props);
   }
   render() {
-    console.log(this.props.name);
     return (
       <div align="center">
         <p>NAME:{this.props.name}</p>

@@ -5,7 +5,6 @@ const initialState = {
   phone:""
 };
 const example = (state = initialState, action) => {
-  console.log("getting"+action.text);
   switch (action.type) {
     case "BUTTON_CLICKED":
       return {
@@ -16,7 +15,6 @@ const example = (state = initialState, action) => {
         phone:action.text.phone1
       };
     case "Inputchange":
-      console.log(action.text);
       return {
         ...state
       };
