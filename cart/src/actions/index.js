@@ -1,4 +1,9 @@
-export const handleinput = (value1, value2) => ({
+export const buttonClicked = value1 => ({
+   type: 'BUTTON_CLICKED',
+   text: value1
+ });
+
+export const handleinput = value1 => ({
   type: "BUTTON_CLICKED",
   text: value1
 });
