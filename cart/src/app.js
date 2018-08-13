@@ -1,54 +1,83 @@
 import React from "react";
-import { connect } from "react-redux";
-import { buttonClicked, handleinput } from "./actions";
 import "./styles.css";
+import {connect} from "react-redux";
+import { addtocart, cartclick, backbutton, deletefromcart, deletecart } from "./actions";
 
-var val1 = "";
-var val2 = "";
-var arr = [];
-const mapStateToProps = state => ({
-  count: state.example.count,
-  name: state.example.name
+const mapSateToProps = state =>({
+  products : state.cartreducer.products,
+  total : state.cartreducer.total,
+  page : state.cartreducer.page,
+  cart : state.cartreducer.cart
 });
-
-const mapDispatchToProps = dispatch => ({
-  buttonClicked: () => dispatch(handleinput(val1))
-  //handleinput: () => dispatch(handleinput("hf"))
-});
-
-class Example extends React.Component {
-  constructor(props) {
+const mapDispatchToProps = dispatch =>({
+  addToCart : val => dispatch(addtocart(val)),
+  deleteFromCart : val => dispatch(deletefromcart(val)),
+  cartClick : () => dispatch(cartclick()),
+  backButton : () => dispatch(backbutton()),
+  deleteCart: val => dispatch(deletecart(val))
+})
+class App extends React.Component{
+  constructor(props){
     super(props);
-    // this.handlechange= this.handlechange.bind(this);
   }
-
-  handlechange = event => {
-    val1 = val1 + "/" + event.target.value;
-    console.log(val1);
-  };
-  //handlechange1 = event => {
-  //val2 = event.target.value;
-  // console.log(val2);
-  // };
-  render() {
-    return (
+  render(){
+    if(this.props.page === "home_page"){
+    return(
+      <div class="body">
+      <body>
+    <button id="count">{this.props.total}</button>
+    <button id="cart" onClick={this.props.cartClick.bind(this)}>CART</button>
+    <table>
+    <tr>
+     <th>ID</th>
+     <th>NAME</th>
+     <th>PRICE</th>
+    </tr>
+    {this.props.products.map(product => <tr>
+      <td>{product.id}</td>
+      <td>{product.name}</td>
+      <td>{product.price}</td>
+      <button id="add" onClick={this.props.addToCart.bind(this,product.id)}>add</button>
+      </tr>)}
+    </table>
+    </body>
+    </div>);
+  }
+  else{
+    if(this.props.total>0){
+  return(
+    <div>
+  <button id="back" onClick={this.props.backButton.bind(this)}>Back</button>
+  <table>
+  <tr>
+   <th>ID</th>
+   <th>NAME</th>
+   <th>PRICE</th>
+   <th>TOTAL</th>
+   </tr>
+  {this.props.cart.map(product => <tr>
+    <td>{product.id}</td>
+    <td>{product.name}</td>
+    <td>{product.price}</td>
+    <td>{product.count}</td>
+    <button id="add" onClick={this.props.addToCart.bind(this,product.id)}>add</button>
+    <button id="add" onClick={this.props.deleteFromCart.bind(this,product.id)}>delete</button>
+    <button id="add" onClick={this.props.deleteCart.bind(this,product.id)}>cut</button>
+    </tr>)}
+  </table>
+  </div>);
+  }
+  else{
+    return(
       <div>
-        name:<input type="text" onBlur={this.handlechange.bind(this)} />
-        <br />
-        age:<input type="text" onBlur={this.handlechange.bind(this)} />
-        <br />
-        phone-no:<input type="text" onBlur={this.handlechange.bind(this)} />
-        <button onClick={this.props.buttonClicked}>Clicked</button>
-        <span> {(arr = this.props.name.split("/"))}</span>
-        <p>first name:{arr[1]}</p>
-        <p>age:{arr[2]}</p>
-        <p>phone-no:{arr[3]}</p>
-      </div>
-    );
+      <button id="back" onClick={this.props.backButton.bind(this)}>Back</button>
+      <h1 align="center">NO ITEM ADDED</h1>
+      <p align="center">go back<span id="blue" ><button id="blue" onClick={this.props.backButton.bind(this)}>Back</button></span>to add items</p>
+    </div>);
   }
 }
+}
+}
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Example);
+
+export default connect(mapSateToProps,mapDispatchToProps)(App);
