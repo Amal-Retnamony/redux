@@ -1,13 +1,32 @@
-export const buttonClicked = value1 => ({
-   type: 'BUTTON_CLICKED',
-   text: value1
- });
+const add = "add";
+const cart = "cart";
+const back = "back";
+const deleteitem = "deleteitem";
+const cut = "cut";
 
-export const handleinput = value1 => ({
-  type: "BUTTON_CLICKED",
-  text: value1
+export const addtocart = (value) => ({
+  type : add,
+  text : value
 });
-export const exampleActions = {
-  BUTTON_CLICKED: "BUTTON_CLICKED",
-  Inputchange: "Inputchange"
-};
+
+export const deletefromcart = (value) => ({
+  type : deleteitem,
+  text : value
+});
+
+
+export const deletecart = (value) => ({
+  type : cut,
+  text : value
+});
+
+
+export const cartclick = () => ({
+  type : cart,
+  text : "cart_page"
+});
+
+export const backbutton = () => ({
+  type : back,
+  text : "home_page"
+});

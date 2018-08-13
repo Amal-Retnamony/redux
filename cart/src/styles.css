@@ -1,0 +1,31 @@
+td{
+  width : 200px;
+  text-align: center;
+}
+
+table{
+  margin-left: 190px;
+  margin-top: 70px;
+  width:80%;
+  height:80%;
+}
+
+th{
+  color:brown;
+}
+
+body{
+    background-color: lightblue;
+}
+
+td th{
+  height : 40px;
+}
+#blue{
+  background-color: blue;
+}
+button{
+  height: 30px;
+  background-color: black;
+  color:white;
+}
